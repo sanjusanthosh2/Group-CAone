@@ -24,16 +24,16 @@ const reducer = (state, action) => {
       return newArr;
 
     case "UPDATE":
-      let updatedArr = state.map((food) => {
-        if (food.id === action.id && food.size === action.size) {
+      let updatedArr = state.map((art) => {
+        if (art.id === action.id && art.size === action.size) {
           // Update the existing item with new quantity and price
           return {
-            ...food,
-            qty: food.qty + parseInt(action.qty), // Increment quantity by the new qty
-            price: food.price + action.price,     // Increment price by the new item's price
+            ...art,
+            qty: art.qty + parseInt(action.qty), // Increment quantity by the new qty
+            price: art.price + action.price,     // Increment price by the new item's price
           };
         }
-        return food;
+        return art;
       });
       return updatedArr;
     case "DROP":

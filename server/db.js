@@ -10,11 +10,11 @@ const mongoDB = async () => {
 
     console.log("Connected to DB successfully");
 
-    // Fetch the 'food_items' collection
-    global.food_items = await mongoose.connection.db.collection("food_items").find({}).toArray();
+    // Fetch the 'articles' collection
+    global.articles = await mongoose.connection.db.collection("articles").find({}).toArray();
 
-    // Fetch the 'foodCategory' collection
-    global.foodCategory = await mongoose.connection.db.collection("foodCategory").find({}).toArray();
+    // Fetch the 'paintingCategory' collection
+    global.paintingCategory = await mongoose.connection.db.collection("paintingCategory").find({}).toArray();
 
     console.log("Data fetched and assigned to global variables");
   } catch (error) {
