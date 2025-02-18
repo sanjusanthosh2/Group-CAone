@@ -25,23 +25,23 @@ export default function Card(props) {
 
   const handleAddToCart = async () => {
     // Find the item in the cart with the same ID and size
-    let food = data.find((item) => item.id === props.foodItem._id && item.size === size);
+    let art = data.find((item) => item.id === props.articles._id && item.size === size);
   
-    if (food) {
-      // If the food with the same size already exists, update the quantity and price
+    if (art) {
+      // If the art with the same size already exists, update the quantity and price
       await dispatch({
         type: "UPDATE",
-        id: props.foodItem._id,
+        id: props.articles._id,
         size: size,         // Include size in the update
         price: finalPrice,  // Ensure the price is correctly calculated based on the qty and size
         qty: qty,           // New quantity to be added
       });
     } else {
-      // If the size is different or the food is not in the cart, add it as a new item
+      // If the size is different or the art is not in the cart, add it as a new item
       await dispatch({
         type: "ADD",
-        id: props.foodItem._id,
-        name: props.foodItem.name,
+        id: props.articles._id,
+        name: props.articles.name,
         price: finalPrice,
         qty: qty,
         size: size,
@@ -75,7 +75,7 @@ export default function Card(props) {
           style={{ height: "190px", objectFit: "cover" }}
         />
         <div className="card-body">
-          <h5 className="card-title">{props.foodName}</h5>
+          <h5 className="card-title">{props.artName}</h5>
           {/* <p className="card-text">This is some random text. This is description.</p> */}
           <div className="container w-100 p-0" style={{ height: "38px" }}>
             <select

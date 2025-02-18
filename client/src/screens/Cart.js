@@ -42,7 +42,7 @@ export default function Cart() {
     }
   };
 
-  let totalPrice = data.reduce((total, food) => total + food.price, 0);
+  let totalPrice = data.reduce((total, art) => total + art.price, 0);
   return (
     <div>
       {console.log(data)}
@@ -59,13 +59,13 @@ export default function Cart() {
             </tr>
           </thead>
           <tbody>
-            {data.map((food, index) => (
+            {data.map((art, index) => (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
-                <td>{food.name}</td>
-                <td>{food.qty}</td>
-                <td>{food.size}</td>
-                <td>{food.price}</td>
+                <td>{art.name}</td>
+                <td>{art.qty}</td>
+                <td>{art.size}</td>
+                <td>{art.price}</td>
                 <td>
                   <button type="button" className="btn p-0">
                     <Delete

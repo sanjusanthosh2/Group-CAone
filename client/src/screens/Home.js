@@ -5,11 +5,11 @@ import Card from "../components/Card";
 
 export default function Home() {
   const [search, setSearch] = useState("");
-  const [foodCat, setFoodCat] = useState([]);
-  const [foodItem, setFoodItem] = useState([]);
+  const [artCat, setartCat] = useState([]);
+  const [articles, setarticles] = useState([]);
 
   const loadData = async () => {
-    let response = await fetch(`http://localhost:3100/api/foodData`, {
+    let response = await fetch(`http://localhost:3100/api/artData`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,8 +17,8 @@ export default function Home() {
     });
 
     response = await response.json();
-    setFoodItem(response[0]);
-    setFoodCat(response[1]);
+    setarticles(response[0]);
+    setartCat(response[1]);
     // console.log(response[0],response[1]);
   };
 
@@ -111,15 +111,15 @@ export default function Home() {
         </div>
       </div>
       <div className="container">
-        {foodCat.length > 0 ? (
-          foodCat.map((data) => {
+        {artCat.length > 0 ? (
+          artCat.map((data) => {
             return (
               <div className="row mb-3" key={data._id}>
                 <div className="fs-2 m-3 text-warning">{data.CategoryName}</div>
                 <hr className="bg-warning" />
                 <div className="row g-3">
-                  {foodItem.length > 0 ? (
-                    foodItem
+                  {articles.length > 0 ? (
+                    articles
                       .filter(
                         (item) =>
                           item.CategoryName === data.CategoryName &&
@@ -132,8 +132,8 @@ export default function Home() {
                             className="col-12 col-md-6 col-lg-4"
                           >
                             <Card
-                              foodItem={filterItems} // Pass filterItems as foodItem
-                              foodName={filterItems.name}
+                              articles={filterItems} // Pass filterItems as articles
+                              artName={filterItems.name}
                               options={filterItems.options[0]}
                               ImgSrc={filterItems.img}
                             ></Card>
