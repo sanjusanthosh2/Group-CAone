@@ -17,7 +17,7 @@ export default function Login() {
         password: credentials.password,
       })
     );
-    const response = await fetch(`${import.meta.env.REACT_APP_API_BASE_URL}/api/login`, {
+    const response = await fetch(`http://localhost:3100/api/login`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
