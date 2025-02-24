@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-router.post('/foodData', (req, res) => {
+router.post('/artData', (req, res) => {
     try {
         
         res.send([global.articles,global.paintingCategory])
