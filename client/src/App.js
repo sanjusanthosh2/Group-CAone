@@ -1,4 +1,4 @@
-import "./App.css";
+
 import Home from "./screens/Home";
 import MyOrder from "./screens/MyOrder.js";
 
@@ -9,6 +9,7 @@ import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
 import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 import Signup from "./screens/Signup.js";
 import { CartProvider } from "./components/ContextReducer.js";
+import Invoice from "./screens/invoice.js";
 
 
 function App() {
@@ -16,11 +17,13 @@ function App() {
     <CartProvider>
       <Router>
         <div>
+          
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/myOrder" element={<MyOrder />} />
+            <Route path="/invoice" element={<Invoice />} />
           </Routes>
         </div>
       </Router>
