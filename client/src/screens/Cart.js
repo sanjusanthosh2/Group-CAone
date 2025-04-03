@@ -16,33 +16,9 @@ export default function Cart() {
   }
 
   const handleCheckOut = async () => {
-    let userEmail = localStorage.getItem("userEmail");
-
-    try {
-      let response = await fetch(`http://localhost:3100/api/orderData`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          order_data: data,
-          email: userEmail,
-          order_date: new Date().toDateString(),
-        }),
-      });
-
-      console.log("Order Response:", response);
-
-      if (response.ok) {
-        navigate("/invoice", { state: { order: data, total: totalPrice } }); // Navigate to invoice page
-      } else {
-        console.log("Error in order submission:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error in order submission:", error);
-    }
+    navigate("/payment", { state: { order: data, total: totalPrice } });
   };
-
+  
   let totalPrice = data.reduce((total, art) => total + art.price, 0);
   return (
     <div>

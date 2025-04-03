@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "../components/ContextReducer"; // Import dispatch
+import { useDispatch } from "../components/ContextReducer";
 
 export default function Invoice() {
   const location = useLocation();
@@ -12,11 +12,9 @@ export default function Invoice() {
   const [userEmail, setUserEmail] = useState("");
 
   useEffect(() => {
-    // Clear cart on component mount
     dispatch({ type: "DROP" });
   }, [dispatch]);
 
-  // Function to send the invoice via email
   const handleSendInvoice = async () => {
     if (!userEmail) {
       alert("Please enter your email.");
@@ -25,7 +23,7 @@ export default function Invoice() {
 
     try {
       const invoiceData = {
-        email: userEmail, // User-provided email
+        email: userEmail,
         order: order.map((item, index) => ({
           id: index + 1,
           name: item.name,
@@ -73,7 +71,7 @@ export default function Invoice() {
         <tbody>
           {order.map((item, index) => (
             <tr key={index}>
-              <td>{index + 1}</td>
+              <td>{index + 1}</td> {/* Starts from 1 instead of 0 */}
               <td>{item.name}</td>
               <td>{item.qty}</td>
               <td>{item.size}</td>
@@ -85,7 +83,6 @@ export default function Invoice() {
 
       <h3 className="text-end">Total Price: ₹{total}/-</h3>
 
-      {/* Email input field */}
       <div className="mt-4">
         <label htmlFor="email" className="form-label">
           Enter your Email to receive the invoice:
@@ -98,18 +95,12 @@ export default function Invoice() {
           value={userEmail}
           onChange={(e) => setUserEmail(e.target.value)}
         />
-        <button
-          className="btn btn-success mt-2"
-          onClick={handleSendInvoice}
-        >
+        <button className="btn btn-success mt-2" onClick={handleSendInvoice}>
           Send Invoice
         </button>
       </div>
 
-      <button
-        className="btn btn-primary mt-3"
-        onClick={() => navigate("/")}
-      >
+      <button className="btn btn-primary mt-3" onClick={() => navigate("/")}>
         Back to Home
       </button>
     </div>
