@@ -10,6 +10,7 @@ import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 import Signup from "./screens/Signup.js";
 import { CartProvider } from "./components/ContextReducer.js";
 import Invoice from "./screens/invoice.js";
+import Payment from "./screens/Payment.js";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/myOrder" element={<MyOrder />} />
             <Route path="/invoice" element={<Invoice />} />
+            <Route path="/payment" element={<Payment />} />
           </Routes>
         </div>
       </Router>
