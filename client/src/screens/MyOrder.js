@@ -39,27 +39,39 @@ export default function MyOrder() {
                     {orderData && orderData.order_data && orderData.order_data.length > 0 ? (
                         orderData.order_data.slice(0).reverse().map((order, index) => (
                             <div key={index}>
-                                {order[0]?.Order_date && (
-                                    <div className='m-auto mt-5'>
-                                        <strong>{order[0].Order_date}</strong>
-                                        <hr />
-                                    </div>
-                                )}
+                                <div className='m-auto mt-5'>
+                                    <strong>{order.Order_date}</strong>
+                                    <hr />
+                                </div>
                                 <div className='d-flex flex-wrap'>
-                                    {order.map((item, itemIndex) => (
-                                        item.Order_date ? null : (
+                                    {order.items && Array.isArray(order.items) ? (
+                                        order.items.map((item, itemIndex) => (
                                             <div 
                                                 key={itemIndex} 
                                                 className='col-12 col-md-6 col-lg-4'
-                                                onClick={() => handleOrderClick(order)} // Redirect on click
+                                                onClick={() => handleOrderClick(order.items)}
                                                 style={{ cursor: "pointer" }}
                                             >
-                                                <div className="card mt-3" style={{ width: "16rem", maxHeight: "360px" }}>
+                                                <div className="card mt-3" style={{ width: "16rem", maxHeight: "460px" }}>
+                                                    {item.img && (
+                                                        <div style={{ height: "200px", overflow: "hidden" }}>
+                                                            <img 
+                                                                src={item.img} 
+                                                                className="card-img-top" 
+                                                                alt={item.name}
+                                                                style={{ 
+                                                                    width: "100%",
+                                                                    height: "100%",
+                                                                    objectFit: "cover"
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    )}
                                                     <div className="card-body">
                                                         <h5 className="card-title">{item.name}</h5>
-                                                        <div className='container w-100 p-0' style={{ height: "38px" }}>
-                                                            <span className='m-1'>{item.qty}</span>
-                                                            <span className='m-1'>{item.size}</span>
+                                                        <div className='container w-100 p-0'>
+                                                            <span className='m-1'>Qty: {item.qty}</span>
+                                                            <span className='m-1'>Size: {item.size}</span>
                                                             <div className='d-inline ms-2 h-100 w-20 fs-5'>
                                                                 ₹{item.price}/-
                                                             </div>
@@ -67,8 +79,8 @@ export default function MyOrder() {
                                                     </div>
                                                 </div>
                                             </div>
-                                        )
-                                    ))}
+                                        ))
+                                    ) : null}
                                 </div>
                             </div>
                         ))
