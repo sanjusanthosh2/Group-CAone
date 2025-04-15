@@ -11,17 +11,46 @@ export default function Payment() {
   const [cvv, setCvv] = useState("");
   const [cardHolder, setCardHolder] = useState("");
 
-  const handlePayment = () => {
+  const handlePayment = async () => {
     if (!cardNumber || !expiryDate || !cvv || !cardHolder) {
       alert("Please fill in all payment details.");
       return;
     }
 
-    // Simulate successful payment
-    alert("Payment Successful!");
+    try {
+      // Get user email from localStorage
+      const userEmail = localStorage.getItem("userEmail");
+      if (!userEmail) {
+        alert("Please login first");
+        navigate("/login");
+        return;
+      }
 
-    // Redirect to Invoice page with order details
-    navigate("/invoice", { state: { order, total } });
+      // Save order to MongoDB
+      const response = await fetch("http://localhost:3100/api/orderData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: userEmail,
+          order_data: order,
+          order_date: new Date().toISOString()
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save order");
+      }
+
+      // If order is saved successfully
+      alert("Payment Successful!");
+      navigate("/invoice", { state: { order, total } });
+
+    } catch (error) {
+      console.error("Error processing payment:", error);
+      alert("Payment failed. Please try again.");
+    }
   };
 
   return (
